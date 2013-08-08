@@ -91,7 +91,7 @@ public class MessageFacade {
 		
 		 String[] args = new String[]{id1.toString(), id2.toString()};      
 		
-		Cursor cursor = db.query(MessageEntry.TABLE_NAME, null, "remetente = ? and destinatario = ?", args, null, null, MessageEntry.COLUMN_DATA + " desc");
+		Cursor cursor = db.query(MessageEntry.TABLE_NAME, null, "remetente = ? and destinatario = ?", args, null, null, MessageEntry._ID);
 		
 		List<Message> result = new ArrayList<Message>();
 

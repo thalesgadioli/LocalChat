@@ -72,7 +72,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 			
 			msg.setTexto(texto);
 			
-			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mi");
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 			
 			msg.setDt_enviada(formatter.format(new Date()));
 			
