@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LocalChat</string>
+    <string name="action_settings">Configurações</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_list">Lista de Contatos</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="title_activity_cadastro">Cadastro</string>
+    <string name="title_activity_primeiro_cadastro">PrimeiroCadastroActivity</string>
+
+</resources>
