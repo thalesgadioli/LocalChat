@@ -52,6 +52,21 @@ public class MessageFacade {
 		return result;
 	}
 	
+	public static int deleteById (Context context, Long id) {
+		if (context==null)
+			return -1;
+		
+		SQLiteDatabase db = new SQLiteDBHelper(context).getWritableDatabase();
+	
+		String[] args = new String[]{id.toString()};
+		
+		int result = db.delete(MessageEntry.TABLE_NAME, MessageEntry._ID + " = ?", args);
+		
+		db.close();
+		
+		return result;
+	}
+	
 	public static List<Message> get (Context context) {
 		if (context==null)
 			return null;

@@ -78,6 +78,35 @@ public class UserFacade {
 		return result;
 	}
 	
+	public static List<User> getWithoutId (Context context, Long id) {
+		if (context==null)
+			return null;
+		
+		SQLiteDatabase db = new SQLiteDBHelper(context).getReadableDatabase();
+		
+		Cursor cursor = db.query(UserEntry.TABLE_NAME, null, "_ID <> " + id, null, null, null, UserEntry._ID);
+		
+		List<User> result = new ArrayList<User>();;
+
+		if (cursor.moveToFirst()) {
+			User user;
+			do {
+				user = new User();
+				user.setId(cursor.getLong(cursor.getColumnIndex(UserEntry._ID)));
+				user.setName(cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME)));
+				user.setPhone(cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_PHONE)));
+				
+				result.add(user);
+				
+			} while (cursor.moveToNext());
+		}
+		
+		db.close();
+		
+		return result;
+	}
+
+	
 	public static User getById (Context context, Long id) {
 		if (context==null)
 			return null;
