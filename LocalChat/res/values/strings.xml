@@ -8,5 +8,6 @@
     <string name="title_activity_chat">ChatActivity</string>
     <string name="title_activity_cadastro">Cadastro</string>
     <string name="title_activity_primeiro_cadastro">PrimeiroCadastroActivity</string>
+    <string name='txt_splash'>LocalChat</string>
 
 </resources>

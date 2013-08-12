@@ -13,9 +13,18 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name="com.thalesgadioli.sqlite.MainActivity"
+         <activity	
+            android:name="com.localchat.sqlite.MainActivity"
             android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name=".MainActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+       <activity
+            android:name="com.localchat.util.SplashActivity"
+            android:label="@string/txt_splash" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,19 +32,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.thalesgadioli.sqlite.ListActivity"
+            android:name="com.localchat.sqlite.ListActivity"
             android:label="@string/title_activity_list" >
         </activity>
         <activity
-            android:name="com.thalesgadioli.sqlite.CadastroActivity"
+            android:name="com.localchat.sqlite.CadastroActivity"
             android:label="@string/title_activity_cadastro" >
         </activity>
         <activity
-            android:name="com.thalesgadioli.sqlite.ChatActivity"
+            android:name="com.localchat.sqlite.ChatActivity"
             android:label="@string/title_activity_chat" >
         </activity>
         <activity
-            android:name="com.thalesgadioli.sqlite.PrimeiroCadastroActivity"
+            android:name="com.localchat.sqlite.PrimeiroCadastroActivity"
             android:label="@string/title_activity_primeiro_cadastro" >
         </activity>
     </application>
