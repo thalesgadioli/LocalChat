@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.localchat.bd.User;
 import com.localchat.bd.UserFacade;
-import com.thalesgadioli.sqlite.R;
 
 public class PrimeiroCadastroActivity extends Activity implements OnClickListener {
 
@@ -52,13 +51,13 @@ if (arg0.getId() == R.id.button5) {
 			
 			long id = UserFacade.insert(user, this);
 			
-			SharedPreferences.Editor editor = getSharedPreferences(MainActivity.PREF_NAME, MODE_PRIVATE).edit();
-			editor.putLong(MainActivity.PREF_USER_ID, id);
+			SharedPreferences.Editor editor = getSharedPreferences(MainActivity_.PREF_NAME, MODE_PRIVATE).edit();
+			editor.putLong(MainActivity_.PREF_USER_ID, id);
 			editor.commit();
 			
 			Toast.makeText(this, "Operacao realizada com sucesso!", Toast.LENGTH_SHORT).show();
 			
-			Intent intent = new Intent(this, MainActivity.class);
+			Intent intent = new Intent(this, MainActivity_.class);
 			startActivity(intent);
 			
 		} 

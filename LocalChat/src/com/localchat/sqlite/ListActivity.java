@@ -14,7 +14,6 @@ import android.widget.ListView;
 
 import com.localchat.bd.User;
 import com.localchat.bd.UserFacade;
-import com.thalesgadioli.sqlite.R;
 
 public class ListActivity extends Activity implements OnItemClickListener {
 	

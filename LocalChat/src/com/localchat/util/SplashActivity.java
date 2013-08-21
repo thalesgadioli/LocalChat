@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import com.thalesgadioli.sqlite.R;
+import com.localchat.sqlite.R;
+
+
 
 
 public class SplashActivity extends Activity {

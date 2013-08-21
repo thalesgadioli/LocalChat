@@ -19,7 +19,6 @@ import android.widget.ListView;
 import com.localchat.bd.Message;
 import com.localchat.bd.MessageFacade;
 import com.localchat.bd.UserFacade;
-import com.thalesgadioli.sqlite.R;
 
 public class ChatActivity extends Activity implements OnClickListener {
 	
@@ -44,8 +43,8 @@ public class ChatActivity extends Activity implements OnClickListener {
 		Intent intent = getIntent();
 		id_dest = (Long) intent.getSerializableExtra("dest_id");
 		
-		SharedPreferences pref = getSharedPreferences(MainActivity.PREF_NAME, MODE_PRIVATE);
-		id = pref.getLong(MainActivity.PREF_USER_ID, 0);
+		SharedPreferences pref = getSharedPreferences(MainActivity_.PREF_NAME, MODE_PRIVATE);
+		id = pref.getLong(MainActivity_.PREF_USER_ID, 0);
 		
 		List<Message> msgs = MessageFacade.getByIds(this, id, id_dest);
 		if (msgs!=null && msgs.size() > 0) {

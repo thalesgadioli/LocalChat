@@ -1,18 +1,22 @@
 package com.localchat.sqlite;
 
-import com.thalesgadioli.sqlite.R;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.ListFragment;
+import android.util.Log;
 
-public class MainActivity extends Activity implements OnClickListener {
-	
+import com.localchat.fragments.CadUserFragmentsInicio;
+import com.localchat.fragments.DefaultFragment;
+import com.localchat.fragments.ListFragmentMenu;
+import com.localchat.fragments.ListFragmentUser;
+
+public class MainActivity extends FragmentActivity implements ListFragmentMenu.OnUserSelectedListener{
+
+	ListFragmentMenu listFragment = new ListFragmentMenu();
 	public static final String PREF_NAME = "lChat_pref"; 
 	
 	public static final String PREF_USER_ID = "pref_userid";
@@ -20,41 +24,84 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.main);
 		
-		Button botao1 = (Button) findViewById(R.id.button1);
-		Button botao2 = (Button) findViewById(R.id.button2);
-		
-		botao1.setOnClickListener(this);
-		botao2.setOnClickListener(this);
-		
-		SharedPreferences pref = getSharedPreferences(MainActivity.PREF_NAME, MODE_PRIVATE);
-		long id = pref.getLong(MainActivity.PREF_USER_ID, 0);
-		
-		if (id == 0) {
-			Intent intent = new Intent(this, PrimeiroCadastroActivity.class);
-			startActivity(intent);
-		}
+		  // É um handset?
+        if (findViewById(R.id.fragment_conteiner) != null) {
 
+            // Caso esse objeto já tenha sido criado então não precisamos fazer nada,
+            // ou então iremos sobrepor fragments
+            if (savedInstanceState != null) {
+                return;
+            }
+            // Adicionamos o nosso Fragment ao FrameLayout
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_conteiner, listFragment).commit();
+        }else if (findViewById(R.id.fragment_content) != null) {
+            // Tablet
+        	
+        	DefaultFragment detailsFragment = new DefaultFragment();
+        	
+			/** Pega a transação */
+			FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+			
+			/** Coloca o fragment de menu do lado esquerdo e o fragment de conteúdo do lado direito */
+			transaction.add(R.id.fragment_list, listFragment); 
+			transaction.add(R.id.fragment_content, detailsFragment); 
+			
+			/** Confirma as transações */
+			transaction.commit();
+			
+        }
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+	public void onUserSelected(int position) {
 
-	@Override
-	public void onClick(View arg0) {
-		
-		if (arg0.getId() == R.id.button2) {
-			Intent intent = new Intent(this, ListActivity.class);
-			startActivity(intent);
-		} else if (arg0.getId() == R.id.button1) {
-			Intent intent = new Intent(this, CadastroActivity.class);
-			startActivity(intent);
-		} 
-	}
-	
+				int posicaoValida = position+1;
+				
+				Fragment newFragment = null;
+		       switch(posicaoValida){
+		        case 1:
+		        	 newFragment = new ListFragmentUser();
+		        	break;
+		        case 2:
+		        	newFragment = new CadUserFragmentsInicio();
+		        	break;
+		        case 3:
+		        	Intent intent = new Intent(Intent.ACTION_MAIN); 
+		        	finish();
+		        	break;
+		        }
+		       
+				if (newFragment != null) {
+
+					/** Pega a transação */
+					FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+					
+					if (findViewById(R.id.fragment_conteiner) != null) {
+						/** Se for acessado de um smartphone o espaço fragment_conteiner existirá */
+						
+						/** Adiciona o fragment com o novo conteúdo no único espaço */
+						transaction.replace(R.id.fragment_conteiner, newFragment); 
+						
+						/** Adiciona o fragment a backstack */
+						transaction.addToBackStack(null);
+						
+					} else if (findViewById(R.id.fragment_content) != null) {
+						/** Se for acessado de um tablet o espaço fragment_conteiner não existirá, existirá o menu e content */
+						
+						/** Coloca o fragment com o novo conteúdo do lado direito */
+						transaction.replace(R.id.fragment_content, newFragment); 
+					}
+
+					/** Confirma a transação */
+					transaction.commit();
+				}
+		       
+	        
+	    }
+
+
 
 }
